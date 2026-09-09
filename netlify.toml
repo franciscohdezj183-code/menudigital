@@ -1,0 +1,154 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  functions = "netlify/functions"
+  command = "npm run dev"
+  targetPort = 5173
+  port = 8888
+  framework = "vite"
+  autoLaunch = false
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://res.cloudinary.com; connect-src 'self' https://api.cloudinary.com; font-src 'self' data:; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+[[redirects]]
+  from = "/api/auth/login"
+  to = "/.netlify/functions/auth-login"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/auth/me"
+  to = "/.netlify/functions/auth-me"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/auth/logout"
+  to = "/.netlify/functions/auth-logout"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/overview"
+  to = "/.netlify/functions/admin-overview"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/qr"
+  to = "/.netlify/functions/admin-qr"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/categories"
+  to = "/.netlify/functions/admin-categories"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/categories/reorder"
+  to = "/.netlify/functions/admin-categories-reorder"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/products"
+  to = "/.netlify/functions/admin-products"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/product"
+  to = "/.netlify/functions/admin-product"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/products/reorder"
+  to = "/.netlify/functions/admin-products-reorder"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/variants"
+  to = "/.netlify/functions/admin-variants"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/variants/reorder"
+  to = "/.netlify/functions/admin-variants-reorder"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/business"
+  to = "/.netlify/functions/admin-business"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/promotions"
+  to = "/.netlify/functions/admin-promotions"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/promotion"
+  to = "/.netlify/functions/admin-promotion"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/promotions/reorder"
+  to = "/.netlify/functions/admin-promotions-reorder"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/media/sign"
+  to = "/.netlify/functions/admin-media-sign"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/media/complete"
+  to = "/.netlify/functions/admin-media-complete"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/media/remove"
+  to = "/.netlify/functions/admin-media-remove"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
